@@ -26,7 +26,7 @@ int main( int argc, char** argv )
   
   /// Compute a rotation matrix with respect to the center of the image
   Point center = Point( src.cols/2, src.rows/2 );
-  double angle = 90.0;
+  double angle = 0.0;
   double scale = 1;
   double diag = sqrt(src.rows*src.rows+src.cols*src.cols);
   
@@ -47,11 +47,30 @@ int main( int argc, char** argv )
   namedWindow( rotate_window, CV_WINDOW_AUTOSIZE );
   imshow( rotate_window, rotate_dst );
   
-  cout << src.size() << endl;
-  cout << rotate_dst.size() << endl;
+  while( true )
+  {
+    int c = waitKey(500);
+    /// Press 'ESC' to exit the program
+    if( (char)c == 27 )
+    { break; }
+    
+    angle+=5;
+    /// Get the rotation matrix with the specifications above
+    rot_mat = getRotationMatrix2D( center, angle, scale );
+    rot_mat.at<double>(0,2) += (diag - src.cols)/2.0;
+    rot_mat.at<double>(1,2) += (diag - src.rows)/2.0;
+  
+    Size size = Size(diag,diag);
+  
+    /// Rotate the warped image
+    warpAffine( src, rotate_dst, rot_mat, size );
+
+    imshow( rotate_window, rotate_dst );
+
+  }
   
   /// Wait until user exits the program
-  waitKey(0);
+  //waitKey(0);
   
   return 0;
 }

@@ -24,20 +24,18 @@ int main(int argc, char** argv){
   
   vector<Mat> photos, sketches, extra, vphotos, vsketches;
   
-  loadImages(argv[1],photos,1);
-  loadImages(argv[2],sketches,1);
+  loadImages(argv[3],photos,1);
+  loadImages(argv[4],sketches,1);
   //loadImages(argv[5],extra,1);
   
   if(photos.size()!=sketches.size())
     return -1;
   
-  for(int i=383; i<photos.size()-2; i+=3){
+  for(int i=0; i<photos.size()-1; i+=2){
     trainingPhotos.push_back(photos[i]);
-    trainingPhotos.push_back(photos[i+1]);
-    testingPhotos.push_back(photos[i+2]);
+    testingPhotos.push_back(photos[i+1]);
     trainingSketches.push_back(sketches[i]);
-    trainingSketches.push_back(sketches[i+1]);
-    testingSketches.push_back(sketches[i+2]);
+    testingSketches.push_back(sketches[i+1]);
   }
   
   testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.end());

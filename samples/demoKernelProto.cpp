@@ -18,18 +18,18 @@ int main(int argc, char** argv){
   vector<Mat> trainingPhotos,	trainingSketches,
   testingPhotos,testingSketches, photos, sketches, extra;
     
-  loadImages(argv[1],photos,1);
-  loadImages(argv[2],sketches,1);
+  loadImages(argv[3],photos,1);
+  loadImages(argv[4],sketches,1);
   //loadImages(argv[5],extra,1);
   
   if(photos.size()!=sketches.size())
     return -1;
   
   for(int i=0; i<photos.size()-1; i+=2){
-    trainingPhotos.push_back(photos[i]);
-    testingPhotos.push_back(photos[i+1]);
-    trainingSketches.push_back(sketches[i]);
-    testingSketches.push_back(sketches[i+1]);
+    trainingPhotos.push_back(photos[i+1]);
+    testingPhotos.push_back(photos[i]);
+    trainingSketches.push_back(sketches[i+1]);
+    testingSketches.push_back(sketches[i]);
   }
   
   testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.end());

@@ -31,8 +31,8 @@ int main(int argc, char** argv){
   
   vector<Mat> photos, sketches, extra, vphotos, vsketches;
   
-  loadImages(argv[1],vphotos,1);
-  loadImages(argv[2],vsketches,1);
+  loadImages(argv[3],vphotos,1);
+  loadImages(argv[4],vsketches,1);
   //loadImages(argv[3],photos,1);
   //loadImages(argv[4],sketches,1);
   //loadImages(argv[5],extra,1);
@@ -41,10 +41,10 @@ int main(int argc, char** argv){
     return -1;
   
   for(int i=0; i<vphotos.size()-1; i+=2){
-    trainingPhotos.push_back(vphotos[i]);
-    testingPhotos.push_back(vphotos[i+1]);
-    trainingSketches.push_back(vsketches[i]);
-    testingSketches.push_back(vsketches[i+1]);
+    trainingPhotos.push_back(vphotos[i+1]);
+    testingPhotos.push_back(vphotos[i]);
+    trainingSketches.push_back(vsketches[i+1]);
+    testingSketches.push_back(vsketches[i]);
   }
   
   int nTestingSketches = testingSketches.size(),

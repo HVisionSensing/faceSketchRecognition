@@ -113,7 +113,7 @@ void calcSIFTDescriptors(Mat src, Mat &descriptors){
 	vector<KeyPoint> keypoints;
 	//featureDetector->detect(im, keypoints, mask);
 
-	keypoints.push_back(KeyPoint(src.rows/2,src.cols/2,src.cols/2));
+	keypoints.push_back(KeyPoint(src.rows/2,src.cols/2,32));
 	descriptorExtractor->compute(src, keypoints, descriptors);
 	//cerr<<" descriptors.rows="<< descriptors.rows <<" keypoints.size()="
 	//		<<keypoints.size()<<" descriptors.cols=" << descriptors.cols << endl;

@@ -17,7 +17,7 @@ using namespace boost::filesystem;
 
 void loadImages(string, vector<Mat>&, float);
 void createFolds(vector<Mat>&, vector<vector<Mat> >&, int);
-float euclideanDistance(Mat, Mat);
+float chiSquareDistance(Mat, Mat);
 void patcher(Mat, int, int, vector<vector<Mat> >&);
 
 #endif

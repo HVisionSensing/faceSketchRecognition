@@ -24,13 +24,12 @@ int main(int argc, char** argv){
   
   if(photos.size()!=sketches.size())
     return -1;
+
+  trainingPhotos.insert(trainingPhotos.end(),photos.begin()+1094,photos.end());
+  trainingSketches.insert(trainingSketches.end(),sketches.begin()+1094,sketches.end());
   
-  for(int i=0; i<photos.size()-1; i+=2){
-    trainingPhotos.push_back(photos[i+1]);
-    testingPhotos.push_back(photos[i]);
-    trainingSketches.push_back(sketches[i+1]);
-    testingSketches.push_back(sketches[i]);
-  }
+  testingPhotos.insert(testingPhotos.end(),photos.begin(),photos.begin()+50);
+  testingSketches.insert(testingSketches.end(),sketches.begin(),sketches.begin()+50);
   
   testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.end());
   

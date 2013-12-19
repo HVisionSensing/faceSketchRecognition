@@ -48,14 +48,6 @@ void createFolds(vector<Mat>& input, vector<vector<Mat> >&output, int num){
   }
 }
 
-float euclideanDistance(Mat a, Mat b){
-  float result = 0;
-  Mat temp;
-  pow(a-b,2,temp);
-  result = sum(temp).val[0];
-  return result;
-}
-
 void patcher(Mat img, int size, int delta, vector<vector<Mat> > &result){
   int w = img.cols, h=img.rows;
   
@@ -67,4 +59,13 @@ void patcher(Mat img, int size, int delta, vector<vector<Mat> > &result){
     result.push_back(col);
   }
   
+}
+
+float chiSquareDistance(Mat a, Mat b){
+  float result = 0;
+  for (int i = 0; i < a.rows; i++){
+    float temp = pow((a.at<float>(i) - b.at<float>(i)),2)/(a.at<float>(i) + b.at<float>(i));
+    result += temp!=temp? 0 : temp;
+  }
+  return result;
 }

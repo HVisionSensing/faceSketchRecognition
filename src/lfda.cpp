@@ -121,7 +121,7 @@ Mat LFDA::project(Mat image)
     vconcat(result, this->omegaK[j].t()*phi[j], result);
   }
   
-  normalize(result, result, 1);
+  //normalize(result, result, 1);
   
   return result;
 }

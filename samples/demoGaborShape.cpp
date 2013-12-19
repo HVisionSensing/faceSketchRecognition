@@ -12,7 +12,7 @@ int main ( int argc, char** argv )
   Mat src, dst;
   
   Mat kernel;
-  Mat gaborKernel = getGaborKernel(Size(3,3), 2.0, 2.0, 2.0, 2.0);
+  Mat gaborKernel = getGaborKernel(Size(5,5), 1.0, 3.14/4, 1.0, 0.5);
   Point anchor;
   double delta;
   int ddepth;
@@ -22,7 +22,7 @@ int main ( int argc, char** argv )
   int c;
   
   /// Load an image
-  src = imread( argv[1] );
+  src = imread( argv[1],0 );
   
   if( !src.data )
   { return -1; }

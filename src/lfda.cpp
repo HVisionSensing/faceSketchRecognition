@@ -46,7 +46,7 @@ void LFDA::compute()
   
   for(int i=0; i < Xk.size(); i++){
    
-    Mat Xk_mean=Xk[i].col(0), Xpk_mean=Xpk[i].col(0), Xsk_mean=Xsk[i].col(0);
+    Mat Xk_mean=Xk[i].col(0);
        
     int ncols = Xk[i].cols; 
     for(int j=0; j<ncols; j++)
@@ -68,24 +68,26 @@ void LFDA::compute()
     LDA lda;
     lda.compute(dataPCA, _classes);
   
-    Mat Lk = lda.eigenvectors();
-    Lk.convertTo(Lk, CV_32F);
-  
-    Mat omega = Lk.t()*Wk;
-    
-    omegaK.push_back(omega.t());
+    PCAvec.push_back(pca);
+    LDAvec.push_back(lda);
+     
   }
 }
 
 Mat LFDA::project(Mat image)
 {
   vector<Mat> phi = extractDescriptors(image,this->size,this->overlap);
-  Mat temp = omegaK[0].t()*(phi[0] - XkVectorMean[0]);
+  Mat temp = PCAvec[0].project(phi[0]);
+  //cout << temp.size() << endl;
+  temp = LDAvec[0].project(temp.clone());
   normalize(temp,temp,1);
   Mat result = temp.clone();
   for(int j=1; j<phi.size(); j++){
-    temp = omegaK[j].t()*(phi[j]-XkVectorMean[j]);
+    temp = PCAvec[j].project(phi[j]);
+    //cout << temp.size() << endl;
+    temp = LDAvec[j].project(temp.clone());
     normalize(temp,temp,1);
+    //cout << "concatened" << endl;
     vconcat(result, temp.clone(), result);
   }
   

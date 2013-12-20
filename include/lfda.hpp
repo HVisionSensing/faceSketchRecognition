@@ -12,6 +12,8 @@ class LFDA
 {
 private:
   vector<Mat> trainingPhotos,	trainingSketches, Xsk, Xpk, Xk, omegaK, XkVectorMean;
+  vector<PCA> PCAvec;
+  vector<LDA> LDAvec;
   vector<int> _classes;
   int size, overlap;
   

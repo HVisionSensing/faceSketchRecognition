@@ -49,7 +49,7 @@ int main( int argc, char** argv )
   /// Total Gradient (approximate)
   addWeighted( abs_grad_x, 0.5, abs_grad_y, 0.5, 0, grad );
   
-  imshow( window_name, grad );
+  imshow( window_name, abs_grad_y );
   
   waitKey(0);
   

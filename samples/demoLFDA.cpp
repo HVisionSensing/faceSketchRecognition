@@ -38,11 +38,11 @@ int main(int argc, char** argv){
   if(photos.size()!=sketches.size())
     return -1;
 
-  trainingPhotos.insert(trainingPhotos.end(),photos.begin()+50,photos.end());
-  trainingSketches.insert(trainingSketches.end(),sketches.begin()+50,sketches.end());
+  trainingPhotos.insert(trainingPhotos.end(),photos.begin()+100,photos.begin()+188);
+  trainingSketches.insert(trainingSketches.end(),sketches.begin()+100,sketches.begin()+188);
   
-  testingPhotos.insert(testingPhotos.end(),photos.begin(),photos.begin()+50);
-  testingSketches.insert(testingSketches.end(),sketches.begin(),sketches.begin()+50);
+  testingPhotos.insert(testingPhotos.end(),photos.begin(),photos.begin()+100);
+  testingSketches.insert(testingSketches.end(),sketches.begin(),sketches.begin()+100);
   
   testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.end());
   
@@ -96,11 +96,11 @@ int main(int argc, char** argv){
   
   for(int i=0; i<nTestingSketches; i++){
     double val = norm(testingPhotosfinal[i],testingSketchesfinal[i], NORM_L2);
-    //cerr << "photo and sketch "<< i << " d1= "<< val << endl;
+    cerr << "photo and sketch "<< i << " d1= "<< val << endl;
     int temp = 0;
     for(int j=0; j<nTestingPhotos; j++){
       if(norm(testingPhotosfinal[j],testingSketchesfinal[i],NORM_L2)<= val && i!=j){
-	//cerr << "small "<< j << " d1= "<< norm(testingPhotosfinal[j],testingSketchesfinal[i],NORM_L2) << endl;
+	cerr << "small "<< j << " d1= "<< norm(testingPhotosfinal[j],testingSketchesfinal[i],NORM_L2) << endl;
 	temp++;
       }
     }

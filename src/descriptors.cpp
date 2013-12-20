@@ -100,22 +100,21 @@ void calcLBPHistogram(Mat src, Mat &hist){
 }
 
 void calcSIFTDescriptors(Mat src, Mat &descriptors){
-	//FeatureDetector* featureDetector = new SiftFeatureDetector();
-	DescriptorExtractor* descriptorExtractor = new SiftDescriptorExtractor();
-	//#if CV_MAJOR_VERSION*100+CV_MINOR_VERSION*10+CV_SUBMINOR_VERSION > 233
-	//In OpenCV 2.4, default for SURF is extended version (of size 128)
-	//((SurfFeatureDetector *)featureDetector)->extended = false;
-	//((SurfDescriptorExtractor *)descriptorExtractor)->extended = false;
-	//#endif
+	
+    VlDsiftFilter* dsift = vl_dsift_new_basic(src.cols, src.rows, src.cols, src.cols/4);
+    vl_dsift_set_window_size(dsift, src.cols/2);
+  
+    vector<float> img;
+    for(int i = 0; i < src.rows; ++i)
+      for(int j = 0; j < src.cols; ++j)
+	img.push_back(src.at<unsigned char>(i, j));
 
-	//Mat mask(0, 0, CV_8UC1);
-	//Mat descriptors;
-	vector<KeyPoint> keypoints;
-	//featureDetector->detect(im, keypoints, mask);
-
-	keypoints.push_back(KeyPoint(src.rows/2,src.cols/2,32));
-	descriptorExtractor->compute(src, keypoints, descriptors);
-	//cerr<<" descriptors.rows="<< descriptors.rows <<" keypoints.size()="
-	//		<<keypoints.size()<<" descriptors.cols=" << descriptors.cols << endl;
-	//cout << descriptors.size() << "  " << descriptors << endl;
+    vl_dsift_process(dsift, &img[0]);
+  
+    const float* temp =  vl_dsift_get_descriptors(dsift);
+  
+    descriptors = Mat::zeros(1,128,CV_32F);
+  
+    for(int i=0; i<128; i++)
+      descriptors.at<float>(i) = temp[i];
 }

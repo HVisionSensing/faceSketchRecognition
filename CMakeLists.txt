@@ -27,6 +27,8 @@ find_package(Boost COMPONENTS system filesystem REQUIRED)
 #---------------------------------
 # includes & sources
 #---------------------------------
+include_directories(/home/marco/vlfeat-0.9.17)
+link_directories(/home/marco/vlfeat-0.9.17/bin/glnxa64)
 
 include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 
@@ -37,7 +39,7 @@ file(GLOB lib_srcs "src/*.cpp")
 # build the library & link
 #---------------------------------
 add_library(${the_library} ${lib_srcs} ${lib_hdrs})
-target_link_libraries(${the_library} ${OpenCV_LIBS} ${Boost_LIBRARIES})
+target_link_libraries(${the_library} ${OpenCV_LIBS} ${Boost_LIBRARIES} vl)
 
 #---------------------------------
 # add tests

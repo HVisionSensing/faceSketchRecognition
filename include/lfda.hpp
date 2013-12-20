@@ -11,7 +11,8 @@ using namespace cv;
 class LFDA
 {
 private:
-  vector<Mat> trainingPhotos,	trainingSketches, Xsk, Xpk, Xk, omegaK;
+  vector<Mat> trainingPhotos,	trainingSketches, Xsk, Xpk, Xk, omegaK, XkVectorMean;
+  vector<int> _classes;
   int size, overlap;
   
 public:

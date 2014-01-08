@@ -18,18 +18,18 @@ int main(int argc, char** argv){
   vector<Mat> trainingPhotos,	trainingSketches,
   testingPhotos,testingSketches, photos, sketches, extra;
     
-  loadImages(argv[3],photos,1);
-  loadImages(argv[4],sketches,1);
+  loadImages(argv[1],photos,1);
+  loadImages(argv[2],sketches,1);
   //loadImages(argv[5],extra,1);
   
   if(photos.size()!=sketches.size())
     return -1;
 
-  trainingPhotos.insert(trainingPhotos.end(),photos.begin()+1094,photos.end());
-  trainingSketches.insert(trainingSketches.end(),sketches.begin()+1094,sketches.end());
+  trainingPhotos.insert(trainingPhotos.end(),photos.begin(),photos.begin()+100);
+  trainingSketches.insert(trainingSketches.end(),sketches.begin(),sketches.begin()+100);
   
-  testingPhotos.insert(testingPhotos.end(),photos.begin(),photos.begin()+50);
-  testingSketches.insert(testingSketches.end(),sketches.begin(),sketches.begin()+50);
+  testingPhotos.insert(testingPhotos.end(),photos.begin()+100,photos.begin()+200);
+  testingSketches.insert(testingSketches.end(),sketches.begin()+100,sketches.begin()+200);
   
   testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.end());
   
@@ -94,6 +94,8 @@ int main(int argc, char** argv){
     cerr << "d1= " << (float)count_if(rank.begin(), rank.end(), [i](int x) {return x < i;})/nTestingSketches << endl;
   }
   
+  
+  return 0;
   cerr << "------------------------------------------------------" << endl;
    
   // Set up training data

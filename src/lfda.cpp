@@ -78,16 +78,16 @@ Mat LFDA::project(Mat image)
 {
   vector<Mat> phi = extractDescriptors(image,this->size,this->overlap);
   Mat temp = PCAvec[0].project(phi[0]);
-  //cout << temp.size() << endl;
+  cout << temp.size() << endl;
   temp = LDAvec[0].project(temp.clone());
   normalize(temp,temp,1);
   Mat result = temp.clone();
   for(int j=1; j<phi.size(); j++){
     temp = PCAvec[j].project(phi[j]);
-    //cout << temp.size() << endl;
+    cout << temp.size() << endl;
     temp = LDAvec[j].project(temp.clone());
     normalize(temp,temp,1);
-    //cout << "concatened" << endl;
+    cout << "concatened" << endl;
     vconcat(result, temp.clone(), result);
   }
   

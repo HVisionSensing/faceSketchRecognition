@@ -27,11 +27,8 @@ void loadImages(string src, vector<Mat> &dest, float proportion){
 			      temp.size().height*proportion));
       dest[num-1] = Mat(temp(Rect(temp.cols/2-100,
 				  temp.rows/2-125, 200, 250)));
-      // elbp(temp,1,8);
-      //dest[num-1].convertTo(dest[num-1],CV_8U);
     }
   }
-  
 }
 
 

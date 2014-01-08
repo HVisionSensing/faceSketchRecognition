@@ -12,7 +12,7 @@ int main ( int argc, char** argv )
   Mat src, dst;
   
   Mat kernel;
-  Mat gaborKernel = getGaborKernel(Size(5,5), 1.0, 3.14/4, 1.0, 0.5);
+  Mat gaborKernel = getGaborKernel(Size(100, 100) , 4*CV_PI, 0*CV_PI/8.0, CV_PI*4.0, 1.0, 0.0);
   Point anchor;
   double delta;
   int ddepth;
@@ -50,7 +50,9 @@ int main ( int argc, char** argv )
     
     /// Apply filter
     filter2D(src, dst, ddepth , gaborKernel, anchor, delta, BORDER_DEFAULT );
-    imshow( window_name, dst );
+    Mat temp;
+    normalize(gaborKernel,temp, 1, 0, NORM_MINMAX);
+    imshow( window_name, temp );
     ind++;
   }
   

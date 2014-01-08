@@ -31,20 +31,22 @@ int main(int argc, char** argv){
   
   vector<Mat> photos, sketches, extra, vphotos, vsketches;
   
+  loadImages(argv[1],vphotos,1);
+  loadImages(argv[2],vsketches,1);
   loadImages(argv[3],photos,1);
   loadImages(argv[4],sketches,1);
-  //loadImages(argv[5],extra,1);
+  loadImages(argv[5],extra,1);
   
   if(photos.size()!=sketches.size())
     return -1;
 
-  trainingPhotos.insert(trainingPhotos.end(),photos.begin(),photos.begin()+200);
-  trainingSketches.insert(trainingSketches.end(),sketches.begin(),sketches.begin()+200);
+  trainingPhotos.insert(trainingPhotos.end(),vphotos.begin(),vphotos.begin()+5);
+  trainingSketches.insert(trainingSketches.end(),vsketches.begin(),vsketches.begin()+5);
   
-  testingPhotos.insert(testingPhotos.end(),photos.begin()+300,photos.begin()+600);
-  testingSketches.insert(testingSketches.end(),sketches.begin()+300,sketches.begin()+600);
+  testingPhotos.insert(testingPhotos.end(),photos.begin(),photos.end());
+  testingSketches.insert(testingSketches.end(),sketches.begin(),sketches.end());
   
-  testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.end());
+  testingPhotos.insert(testingPhotos.end(),extra.begin(),extra.begin()+1000);
   
   int nTestingSketches = testingSketches.size(),
   nTestingPhotos = testingPhotos.size(),
